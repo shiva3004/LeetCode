@@ -1,3 +1,2 @@
 # LeetCode
-LeetCode solutions done by me <br>
-My profile : https://leetcode.com/shivasupraj/
+LeetCode solutions done by me
