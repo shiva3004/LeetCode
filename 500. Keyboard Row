@@ -1,0 +1,36 @@
+class Solution(object):
+    def findWords(self, words):
+        """
+        :type words: List[str]
+        :rtype: List[str]
+        """       
+        result = []
+        for each in words:
+            if self.is_in_l1(each.lower()):
+                result.append(each)
+            elif self.is_in_l2(each.lower()):
+                result.append(each)
+            elif self.is_in_l3(each.lower()):
+                result.append(each)
+        return result
+    
+    def is_in_l1(self, word):
+        l1 = ['q','w','e','r','t','y','u','i','o','p']
+        for each in word:
+            if each not in l1:
+                return False
+        return True
+    def is_in_l2(self, word):
+        l2= ['a','s','d','f','g','h','j','k','l']
+        for each in word:
+            if each not in l2:
+                return False
+        return True
+    def is_in_l3(self, word):
+        l3 = ['z','x','c','v','b','n','m']
+        for each in word:
+            if each not in l3:
+                return False
+        return True
+               
+        
