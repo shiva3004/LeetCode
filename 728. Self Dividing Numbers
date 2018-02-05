@@ -1,0 +1,27 @@
+class Solution(object):
+    def selfDividingNumbers(self, left, right):
+        """
+        :type left: int
+        :type right: int
+        :rtype: List[int]
+        """
+        result = []
+        temp = left
+        for i in range(right - left +1):            
+            temp = left + i
+            if self.is_dividing(temp):
+                result.append(temp)
+        return result
+    
+    def is_dividing(self, val):
+        temp = val
+        while temp > 0:
+            rem = temp % 10
+            if rem == 0:
+                return False
+            if val % rem == 0:
+                temp = temp / 10
+            else:
+                return False
+        return True
+        
