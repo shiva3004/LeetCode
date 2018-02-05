@@ -1,0 +1,25 @@
+class Solution(object):
+    def judgeCircle(self, moves):
+        """
+        :type moves: str
+        :rtype: bool
+        """
+        if len(moves) % 2 == 1:
+            return False
+        horizontal_count = 0
+        vertical_count = 0
+        for each in moves:
+            if each == 'U':
+                horizontal_count += 1
+            elif each == 'D':
+                horizontal_count -= 1
+            elif each == 'L':
+                vertical_count += 1
+            elif each == 'R':
+                vertical_count -= 1
+            else:
+                return False
+        if horizontal_count != 0 or vertical_count != 0:
+            return False
+        return True
+                    
