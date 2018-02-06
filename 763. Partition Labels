@@ -1,0 +1,25 @@
+class Solution(object):
+    def partitionLabels(self, S):
+        """
+        :type S: str
+        :rtype: List[int]
+        """
+        has_there = set([])
+        words = []
+        result = []
+        for each in S:
+            if each not in has_there:
+                has_there.add(each)
+                words.append(each)
+            else:
+                for i in range(len(words)):
+                    if each in words[i]:
+                        words.append(each)
+                        words[i] = ''.join(words[i:])
+                        del words[i+1:]
+                        break        
+        for each in words:
+            result.append(len(each))
+        return result
+            
+                        
