@@ -1,0 +1,22 @@
+class Solution(object):
+    def convert(self, s, numRows):
+        """
+        :type s: str
+        :type numRows: int
+        :rtype: str
+        """
+        if numRows < 2:
+            return s
+        index = 0
+        ans = []
+        result = [[] for i in range(numRows)]
+        for each in s:
+            result[index].append(each)
+            if index == 0:
+                step = 1
+            elif index == numRows - 1:
+                step = -1
+            index += step
+        for l in result:
+            ans.append(''.join(l))
+        return ''.join(ans)
