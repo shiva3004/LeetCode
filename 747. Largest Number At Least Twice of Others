@@ -1,0 +1,18 @@
+class Solution(object):
+    def dominantIndex(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        first_max = -1
+        for i in range(len(nums)):
+            if nums[i] > first_max:
+                second_max = first_max
+                first_max = nums[i]
+                pos = i
+            elif nums[i] > second_max and nums[i] < first_max:
+                second_max = nums[i]
+        if first_max >= second_max * 2:
+            return pos
+        return -1
+        
