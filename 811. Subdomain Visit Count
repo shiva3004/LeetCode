@@ -1,0 +1,24 @@
+class Solution(object):
+    def subdomainVisits(self, cpdomains):
+        """
+        :type cpdomains: List[str]
+        :rtype: List[str]
+        """
+        domain_mapper = {}
+        res = []
+        for cpdomain in cpdomains:
+            count, domain = cpdomain.split()
+            count = int(count)
+            domain = domain.split('.')
+            for i in range(len(domain)):
+                if '.'.join(domain) in domain_mapper:
+                    domain_mapper['.'.join(domain)] += count
+                else:
+                    domain_mapper['.'.join(domain)] = count
+                domain.pop(0)
+            
+        for key in domain_mapper:
+            res.append(str(domain_mapper[key])+ ' ' + key)
+        
+        return res
+        
