@@ -1,0 +1,47 @@
+class Solution:
+    def floodFill(self, image, sr, sc, newColor):
+        """
+        :type image: List[List[int]]
+        :type sr: int
+        :type sc: int
+        :type newColor: int
+        :rtype: List[List[int]]
+        """
+        
+        
+        oldColor = image[sr][sc]
+        image[sr][sc] = newColor
+        image_matrix = [ [True for j in range(len(image[0]))] for i in range(len(image)) ]
+        neighbours = self.getNeighbours(image, sr, sc)
+        for neighbour in neighbours:
+            self.floodFillHelper(image, neighbour, oldColor, newColor, image_matrix)    
+        return image
+        
+    def floodFillHelper(self, image, neighbour, oldColor, newColor, image_matrix):
+        r, c = neighbour
+        if image[r][c] != oldColor or not image_matrix[r][c]:
+            return
+        image[r][c] = newColor
+        image_matrix[r][c] = False
+        neighbours = self.getNeighbours(image, r, c)
+        for neighbour in neighbours:
+            self.floodFillHelper(image, neighbour, oldColor, newColor, image_matrix)
+
+    def getNeighbours(self, image, r, c):
+        s_r = r - 1 if r > 0 else r
+        e_r = r + 1 if r < len(image) - 1 else r
+        s_c = c - 1 if c > 0 else c
+        e_c = c + 1 if c < len(image[0]) - 1 else c
+        res = []
+        while s_r <= e_r:
+            while s_c <= e_c:
+                if (s_r == r and s_c != c) or (s_c == c and s_r != r):
+                    if s_r == r and s_c == c:
+                        continue
+                    res.append([s_r, s_c])
+                s_c += 1
+            s_r += 1
+            s_c = c - 1 if c > 0 else c
+        return res
+            
+            
