@@ -1,0 +1,35 @@
+class Solution:
+    def numDecodings(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        mapper = {}
+        return self.numDecodingsHelper(s, mapper)
+    
+    def numDecodingsHelper(self, s, mapper):
+        if s in mapper.keys():
+            return mapper[s]
+        
+        if len(s) == 1 and self.isValid(s):
+            return 1
+        elif len(s) <= 1:
+            return 0
+        count = 0
+        one = s[0]; two = ''
+        for i in range(1, len(s)):
+            if self.isValid(one):
+                two = s[i:]
+                count += self.numDecodingsHelper(two, mapper)
+                mapper[two] = count
+            else:
+                break
+            two = s[i+1:]
+            one += s[i]
+        if self.isValid(one) and len(two) == 0:
+            count += 1
+        mapper[s] = count
+        return mapper[s]
+    
+    def isValid(self, val):
+        return 1 <= int(val) <= 26
