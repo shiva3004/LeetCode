@@ -1,0 +1,31 @@
+class Solution(object):
+    def generateMatrix(self, n):
+        """
+        :type n: int
+        :rtype: List[List[int]]
+        """
+        res = [[0 for j in range(n)] for i in range(n)] 
+        c1 = 0; c2 = n - 1
+        r1 = 0; r2 = n - 1
+        val = 1
+        while c1 <= c2 and r1 <= r2:
+            for c in range(c1, c2+1):
+                res[r1][c] = val
+                val += 1
+            
+            for r in range(r1+1, r2+1):
+                res[r][c2] = val
+                val += 1
+            
+            if c1 < c2 and r1 < r2:
+                for c in range(c2-1, c1-1, -1):
+                    res[r2][c] = val
+                    val += 1
+                
+                for r in range(r2-1, r1, -1):
+                    res[r][c1] = val
+                    val += 1
+                
+            c1 += 1; c2 -= 1
+            r1 += 1; r2 -= 1
+        return res
